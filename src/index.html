@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+    <div id="app">
+      <div>
+        Лекция №1
+      </div>
+      _______________________________________________________________
+      <br />
+      <button @click="count++">
+        Count is: {{ count }}
+      </button>
+      <br />
+      <input type="number" :value="count" @input="count = $event.target.value" />
+      <br />
+      <input type="number" v-model="count" ref="first"/>
+      <br />
+      <input type="number" :value="count" @input="increment" />
+      <br />
+     
+      <input type="number" :value="doubleCount" disabled/>
+      <br />
+      Квадрат числа: {{doubleCount}}
+      <br />
+      Куб числа: {{cubeCount}}
+      <br />
+      <input type="number" :value="asyncCount" @input="asyncIncrement" />
+      <br />
+      asyncCount: {{asyncCount}}
+      <br />
+      watchCount: {{watchCount}}
+      <br />
+      <ul >
+        <li v-for="(item, index) in items" :key="index" @click="notifyItem(item)">
+          {{item}}
+        </li>
+      </ul>
+      _______________________________________________________________
+      <div :style="computedMargin">
+        Лекция №2
+      </div>
+      <label>
+        <input type="radio" value="green" v-model="color" name="color" class="main" :class="customClasses1">
+        green
+      </label>
+      <br />
+      <label>
+        <input type="radio" value="orange" v-model="color" name="color" class="main" :class="customClasses2">
+        orange
+      </label>
+      <br />
+      <label>
+        <input type="radio" value="red" v-model="color" name="color" class="main" :class="customClasses3">
+        red
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" value="door" name="color" v-model="door" >
+        door
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" value="wheel" name="color" v-model="wheel">
+        wheel
+      </label>
+      <br />
+  
+    _______________________________________________________________
+    <div>
+      Лекция №3
+    </div>
+    <!-- <second-component :count="count" customClass="test-class"></second-component> -->
+    <first-component :count="count"></first-component>
+    <third-component 
+      v-for="(item, index) in items"
+      :key="index"
+      :count="item"
+      @remove-item="removeItem"
+    >
+    </third-component>
+    _______________________________________________________________
+    <div>
+      Лекция №4
+    </div>
+    <custom-component 
+      v-for="(item, index) in items"
+      :key="index"
+      :count="item"
+      @remove-item="removeItem"
+    >
+    </custom-component>
+
+    _______________________________________________________________
+    <div>
+      Лекция №5
+    </div>
+    <slot-parent-component :show-child="showChild" @toggle-child="toggleChild">
+      <template #parent>
+        This is
+      </template>
+      <template #child1>
+        <slot-child-component>
+          This is
+        </slot-child-component>
+      </template>
+      <template #child2>
+        <slot-child-component>
+          This is
+        </slot-child-component>
+      </template>
+    </slot-parent-component>
+  </div>
+  </body>
+</html>
